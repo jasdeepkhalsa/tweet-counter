@@ -7,6 +7,17 @@ It is ideal for:
 * Better understanding what actions cause things to go viral on Twitter
 * Tracking trending searches in real-time\*
 
+![Tweet Counter Rocks!](http://simplyspiritdesign.com/img/tweet-counter.png "Tweet Counter Rocks!")
+
+## Installation ##
+Just use `git` to clone:
+
+    git clone git://github.com/jasdeepkhalsa/tweet-counter.git
+
+Or download a zip, extract it and view the `index.html` in your local browser/web server:
+
+    https://github.com/jasdeepkhalsa/tweet-counter/archive/master.zip
+
 ## Usage ##
 ### Change the search terms ###
 Edit `tweet-counter.js` and add your twitter search terms into the `tw_search` variable:
