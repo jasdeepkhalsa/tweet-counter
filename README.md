@@ -96,6 +96,13 @@ This is pretty straightforward, just update the `tw_feed` variable in `tweet-cou
 ### Update the delay interval ###
 In `tweet-counter.js` the `tw_interval` sets the delay interval in milliseconds. By default this is 10 seconds just to be on the safe side, but can be set to 5 seconds - although the consequences of doing this are unknown. Change it at your own risk.
 
+### How can I get back tweets only in the last hour, or within a specified time-frame? ###
+Please replace the `for (obj in data.statuses)` loop in `tweet-counter.js` with the one in the following gist: https://gist.github.com/jasdeepkhalsa/5939630.
+
+By default this will bring back tweets occuring in the last hour as a rolling time-frame (i.e. each time Tweet Counter runs it will reset the current time and bring back tweets from one hour behind this).
+
+You can also set a fixed time-frame in which you would like to analyse tweets or have tweets occuring only in the last hour, but **not** as a rolling time-frame. All these settings are explained in the extensive comments in the file.
+
 ## How it works... (with magic obviously!) ##
 Tweet counter polls the Twitter API using jQuery's `$.ajax` method and loops through the data each time to find any new tweets to add into a list (more technically called an `array`), which is then counted and displayed on screen.
 
