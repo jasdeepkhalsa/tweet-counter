@@ -1,5 +1,5 @@
 # Tweet Counter #
-Tweet counter counts in real-time\* the number of tweets occuring for a given search in the twittersphere.
+Tweet counter counts in real-time the number of tweets occuring for a given search in the twittersphere.
 
 _5th July 2013: Updated for Twitter API 1.1_
 
@@ -7,7 +7,7 @@ It is ideal for:
 * Keeping tabs on what is being said about a given person, topic or keyword in real-time
 * Usage in events with #hashtags to display the number of tweets using that #hashtag
 * Better understanding what actions cause things to go viral on Twitter
-* Tracking trending searches in real-time\*
+* Tracking trending searches in real-time
 
 ![Tweet Counter Rocks!](http://simplyspiritdesign.com/img/tweet-counter.png "Tweet Counter Rocks!")
 
@@ -64,6 +64,8 @@ Now inside the `tweet-counter` folder create the file `config.json` with the fol
         "access_token_secret":"Your access token secret from Twitter",
         "search_query":"q=search terms here&result_type=recent&count=100&include_entities=false"
     }
+    
+You can get the consumer and access tokens by registering an application at https://dev.twitter.com, and using their `OAuth tool` on any of their API end points.
 
 Edit the `q=` value in the `"search_query"` key with your search terms. You will probably want to leave the rest of the settings the same:
 
