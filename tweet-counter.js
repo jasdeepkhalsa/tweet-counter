@@ -1,40 +1,54 @@
-$(function() {
-	var tw_search = encodeURIComponent('search terms here'),
-	tw_tweet = $('.tw-tweet'),
-	tw_count = $('.tw-count'),
-	tw_username_open = '<span class="tw-username">',
-	tw_text_delimiter = '<span class="tw-delimiter">: </span>',
-	tw_text_open = '<span class="tw-text">',
-	tw_elem_close = '</span>',
-	tw_tweets = [],
-	tw_feed_results = 100,
-	tw_feed = 'http://search.twitter.com/search.json?q=' + tw_search + '&rpp=' + tw_feed_results + '&result_type=recent',
-	tw_interval = 30000;
+$(document).ready(function() {
+	var tw_feed = '/tweet-counter/tweet-counter.php',
+        tw_tweet = $('.tw-tweet'),
+        tw_count = $('.tw-count'),
+        tw_username_open = '<span class="tw-username">',
+        tw_text_delimiter = '<span class="tw-delimiter">: </span>',
+        tw_text_open = '<span class="tw-text">',
+        tw_elem_close = '</span>',
+        tw_tweets = [],
+        tw_interval = 10000;
 
-	function tweetCounter() {
+    var tweetCounter = function() {
 		$.ajax({
 			url : tw_feed,
-			dataType : 'jsonp',
-			crossDomain : true,
-			xhrFields : {
-				withCredentials : true
-			},
 			success : function(data) {
-				for (obj in data.results) {
-					var tw_results = data.results[obj];
-					var tw_latest = data.results[0];
-					if ($.inArray(tw_results.id_str, tw_tweets) === -1) {
-						tw_tweets.push(tw_results.id_str);
+
+                var data = $.parseJSON(data); // Lets convert the returned data into a JavaScript object
+
+                // If there's no data
+                if(data.statuses.length === 0){
+                    tw_tweet.html('Sorry, there are no tweets for this search :(');
+                    return console.error('No tweets found');
+                }
+
+                // If there is data
+                var tw_latest = data.statuses[0];
+                var tw_user_name = tw_latest.user.screen_name;
+                var tw_text = tw_latest.text;
+
+                // Lets go through each tweet
+				for (obj in data.statuses) {
+
+					var tw_result = data.statuses[obj]; // This is the tweet
+                    var tw_unique_id = tw_result.id_str; // This is the id of the tweet
+
+                    // Lets add this id into our array, only if it doesn't already exist
+					if ($.inArray(tw_unique_id, tw_tweets) === -1) {
+						tw_tweets.push(tw_unique_id);
 					};
+
+                    // Okay we can update our page now
 					tw_count.html(tw_tweets.length);
-					tw_tweet.html(tw_username_open + tw_latest.from_user_name + tw_elem_close + tw_text_delimiter + tw_text_open + tw_latest.text + tw_elem_close);
-					// console.log(data.results); // log results, for debugging
+					tw_tweet.html(tw_username_open + tw_user_name + tw_elem_close + tw_text_delimiter + tw_text_open + tw_text + tw_elem_close);
+
+					// console.log(tw_result); // log each tweet object, for debugging
 				}
+                // console.log(tw_tweets) // log tweets, for debugging
 			}
 		});
-		// console.log(tw_tweets); // log results, for debugging
-	}
+	};
 
-	setInterval(tweetCounter, tw_interval);
-	//setTimeout(tweetCounter, tw_interval); // Used for testing one off
+    tweetCounter(); // Start the counter right away, once
+	setInterval(tweetCounter, tw_interval); // Now lets schedule updates for the interval period. By default every 10 seconds.
 });

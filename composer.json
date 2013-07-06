@@ -1,0 +1,14 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mynetx/codebird-php",
+            "autoload": {
+                "classmap": ["src/"]
+            }
+        }
+    ],
+    "require": {
+        "mynetx/codebird-php": "*"
+    }
+}

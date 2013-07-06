@@ -1,1 +1,5 @@
 .project
+vendor/
+composer.lock
+.idea/
+config.json
