@@ -2,7 +2,7 @@
 /**
  * @requires PHP >= 5.3.0, PHP cURL Extension
  */
-require_once("./vendor/mynetx/codebird-php/src/codebird.php");
+require_once("./vendor/jublonet/codebird-php/src/codebird.php");
 $config = json_decode(file_get_contents('./config.json'));
 \Codebird\Codebird::setConsumerKey($config->consumer_key, $config->consumer_secret);
 $cb = \Codebird\Codebird::getInstance();
